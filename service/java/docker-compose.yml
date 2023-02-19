@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  mysql:
+    image: "mysql:5.7"
+    container_name: LibraryDB
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: j8LH9u2Qh
+      MYSQL_USER: root
+      MYSQL_DATABASE: library
+      MYSQL_DATA: /var/run/mysqld
+    ports:
+      - "3306:3306"
+    networks:
+      - webnet
+networks:
+  webnet:
+volumes:
+  MYSQL_DATA:
