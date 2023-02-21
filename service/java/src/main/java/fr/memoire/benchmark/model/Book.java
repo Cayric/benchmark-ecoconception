@@ -20,6 +20,11 @@ public class Book {
     @Column(name="title")
     private String title;
 
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
+    @Column(name="synopsis", columnDefinition="MEDIUMBLOB")
+    private String synopsis;
+
     @ManyToOne
     private Author author;
 

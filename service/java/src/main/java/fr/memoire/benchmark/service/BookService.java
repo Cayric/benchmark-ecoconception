@@ -26,6 +26,7 @@ public class BookService {
         Author author = authorService.getAuthorById(bookRequest.getAuthorId()).orElse(new Author());
         Book book = Book.builder()
                 .title(bookRequest.getTitle())
+                .synopsis(bookRequest.getSynopsis())
                 .author(author)
                 .build();
         return bookRepository.save(book);
