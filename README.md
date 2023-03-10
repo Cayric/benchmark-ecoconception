@@ -1,7 +1,7 @@
 
 # benchmark-ecoconception
 
-Ce projet a pour but de comparer la consommation en ressource de différents services réalisant la même tâche métier et écrit dans différents langages. Les framework utilisés pour chaque services sont massivement utilisés en entreprises et c’est pourquoi ils ont été choisis.
+Ce projet a pour but de comparer la consommation en ressource de différents services réalisant la même tâche métier et écrit dans différents langages. Les framework utilisés pour chaque service sont massivement utilisés en entreprises et c’est pourquoi ils ont été choisis.
 
 
 ## Service
@@ -33,11 +33,11 @@ La base de données existera sous deux formes :
 
 ## Les scénarios
 
-Le scénarios seront lancés depuis JMeter
+Les scénarios seront lancés depuis JMeter
 
-Le premier scénarios créera unitairement des bibliothèque, des auteurs et des livres.
+Le premier scénario créera unitairement des bibliothèque, des auteurs et des livres.
 
-Le deuxième scénarios créera en masse les bibliothèques, les auteurs et les livres.
+Le deuxième scénario créera en masse les bibliothèques, les auteurs et les livres.
 
 ## API Reference
 
