@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about library and notes"
+  version: "1.0.0"
+
+servers:
+  - url: "/"
+
+components:
+  schemas:
+    Library:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+  parameters:
+    name:
+      name: "name"
+      description: "Last name of the person to get"
+      in: path
+      required: true
+      schema:
+        type: "string"
+
+paths:
+  /library:
+    get:
+      operationId: "library.read_all"
+      tags:
+        - "Library"
+      summary: "Read the list of library"
+      responses:
+        "200":
+          description: "Successfully read library list"
+    post:
+      operationId: "library.create"
+      tags:
+        - Library
+      summary: "Library a person"
+      requestBody:
+          description: "Library to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "library"
+                $ref: "#/components/schemas/Library"
+      responses:
+        "201":
+          description: "Successfully created library"
+  /author:
+    get:
+      operationId: "author.read_all"
+      tags:
+        - "Author"
+      summary: "Read the list of author"
+      responses:
+        "200":
+          description: "Successfully read author list"
+
