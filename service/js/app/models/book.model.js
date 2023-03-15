@@ -3,6 +3,7 @@ const sql = require("./db.js");
 // constructor
 const Book = function(book) {
   this.name = book.name;
+  this.synopsis = book.synopsis;
 };
 
 Book.create = (newBook, result) => {
