@@ -1,7 +1,5 @@
 package fr.memoire.benchmark.controller;
 
-import fr.memoire.benchmark.model.Book;
-import fr.memoire.benchmark.model.BookRequest;
 import fr.memoire.benchmark.model.Library;
 import fr.memoire.benchmark.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,11 @@ public class LibraryController {
 
     @Autowired
     private LibraryService libraryService;
+
+    @GetMapping
+    public Iterable<Library> findAll(){
+        return libraryService.getLibraries();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
