@@ -14,6 +14,22 @@ components:
       properties:
         name:
           type: "string"
+    Author:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        library_id:
+          type: integer
+    Book:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        synopsis:
+          type: "string"
+        author_id:
+          type: integer
   parameters:
     name:
       name: "name"
@@ -37,7 +53,7 @@ paths:
       operationId: "library.create"
       tags:
         - Library
-      summary: "Library a person"
+      summary: "Create a library"
       requestBody:
           description: "Library to create"
           required: True
@@ -54,8 +70,48 @@ paths:
       operationId: "author.read_all"
       tags:
         - "Author"
-      summary: "Read the list of author"
+      summary: "Read the list of authors"
       responses:
         "200":
           description: "Successfully read author list"
-
+    post:
+      operationId: "author.create"
+      tags:
+        - Author
+      summary: "Create a author"
+      requestBody:
+        description: "Author to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "author"
+              $ref: "#/components/schemas/Author"
+      responses:
+        "201":
+          description: "Successfully created author"
+  /book:
+    get:
+      operationId: "book.read_all"
+      tags:
+        - "Book"
+      summary: "Read the list of books"
+      responses:
+        "200":
+          description: "Successfully read book list"
+    post:
+      operationId: "book.create"
+      tags:
+        - Author
+      summary: "Create a book"
+      requestBody:
+        description: "Book to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "book"
+              $ref: "#/components/schemas/Book"
+      responses:
+        "201":
+          description: "Successfully created book"
