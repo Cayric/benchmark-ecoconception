@@ -8,9 +8,12 @@ exports.create = (req, res) => {
       });
     }
   
+    console.log(req);
     // Create a book
     const book = new Book({
-      name: req.body.name,
+      title: req.body.title,
+      synopsis: req.body.synopsis,
+      author_id: req.body.author_id
     });
   
     // Save Book in the database

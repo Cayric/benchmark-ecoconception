@@ -3,6 +3,7 @@ const sql = require("./db.js");
 // constructor
 const Author = function(author) {
   this.name = author.name;
+  this.library_id = author.library_id;
 };
 
 Author.create = (newAuthor, result) => {

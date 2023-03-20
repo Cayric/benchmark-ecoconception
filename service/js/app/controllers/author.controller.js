@@ -11,7 +11,10 @@ exports.create = (req, res) => {
     // Create a author
     const author = new Author({
       name: req.body.name,
+      library_id: req.body.library_id
     });
+
+
   
     // Save Author in the database
     Author.create(author, (err, data) => {

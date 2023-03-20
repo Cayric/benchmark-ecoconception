@@ -2,8 +2,9 @@ const sql = require("./db.js");
 
 // constructor
 const Book = function(book) {
-  this.name = book.name;
+  this.title = book.title;
   this.synopsis = book.synopsis;
+  this.author_id = book.author_id;
 };
 
 Book.create = (newBook, result) => {
