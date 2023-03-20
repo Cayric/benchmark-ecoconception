@@ -5,6 +5,10 @@ import fr.memoire.benchmark.model.AuthorRequest;
 import fr.memoire.benchmark.model.Library;
 import fr.memoire.benchmark.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,8 +22,9 @@ public class AuthorService {
     @Autowired
     LibraryService libraryService;
 
-    public Iterable<Author> getAuthors(){
-        return authorRepository.findAll();
+    public Page<Author> getAuthors(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
+        return authorRepository.findAll(pageable);
     }
 
     public Author saveAuthor(AuthorRequest authorRequest){

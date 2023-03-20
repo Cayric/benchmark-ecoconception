@@ -4,6 +4,10 @@ import fr.memoire.benchmark.model.Author;
 import fr.memoire.benchmark.model.Library;
 import fr.memoire.benchmark.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +18,9 @@ public class LibraryService {
     @Autowired
     private LibraryRepository libraryRepository;
 
-    public Iterable<Library> getLibraries(){
-        return libraryRepository.findAll();
+    public Page<Library> getLibraries(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
+        return libraryRepository.findAll(pageable);
     }
 
     public Library saveLibrary(Library library){

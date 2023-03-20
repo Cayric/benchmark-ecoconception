@@ -6,6 +6,10 @@ import fr.memoire.benchmark.model.BookRequest;
 import fr.memoire.benchmark.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Data
@@ -18,8 +22,9 @@ public class BookService {
     @Autowired
     private AuthorService authorService;
 
-    public Iterable<Book> getBooks(){
-        return bookRepository.findAll();
+    public Page<Book> getBooks(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("id").ascending());
+        return bookRepository.findAll(pageable);
     }
 
     public Book saveBook(BookRequest bookRequest){

@@ -3,6 +3,7 @@ package fr.memoire.benchmark.controller;
 import fr.memoire.benchmark.model.Library;
 import fr.memoire.benchmark.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class LibraryController {
     private LibraryService libraryService;
 
     @GetMapping
-    public Iterable<Library> findAll(){
+    public Page<Library> findAll(){
         return libraryService.getLibraries();
     }
 

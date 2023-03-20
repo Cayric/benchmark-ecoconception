@@ -5,6 +5,7 @@ import fr.memoire.benchmark.model.AuthorRequest;
 import fr.memoire.benchmark.model.Book;
 import fr.memoire.benchmark.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @GetMapping
-    public Iterable<Author> findAll(){
+    public Page<Author> findAll(){
         return authorService.getAuthors();
     }
 
