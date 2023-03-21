@@ -8,6 +8,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Data
 @Service
 public class BookService {
@@ -20,6 +22,10 @@ public class BookService {
 
     public Iterable<Book> getBooks(){
         return bookRepository.findAll();
+    }
+
+    public List<Book> getBooksOrderByTitle(){
+        return bookRepository.findByOrderByTitleDesc();
     }
 
     public Book saveBook(BookRequest bookRequest){

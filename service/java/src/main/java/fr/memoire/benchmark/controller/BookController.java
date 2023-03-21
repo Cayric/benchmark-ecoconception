@@ -28,4 +28,9 @@ public class BookController {
         return bookService.saveBook(bookRequest);
     }
 
+    @GetMapping("/orderByTitle")
+    public List<Book> findAllOrderByTitle(){
+        return bookService.getBooksOrderByTitle();
+    }
+
 }
