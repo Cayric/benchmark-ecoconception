@@ -33,4 +33,6 @@ public class BookController {
         return bookService.getBooksOrderByTitle();
     }
 
+    //Ajout d'une route permettant de creer en masse
+
 }

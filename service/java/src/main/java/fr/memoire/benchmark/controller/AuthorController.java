@@ -25,4 +25,6 @@ public class AuthorController {
     public Author save(@RequestBody AuthorRequest authorRequest) {
         return authorService.saveAuthor(authorRequest);
     }
+
+    //Ajout d'une route permettant de creer en masse
 }
