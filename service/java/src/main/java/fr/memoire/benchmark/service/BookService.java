@@ -3,11 +3,13 @@ package fr.memoire.benchmark.service;
 import fr.memoire.benchmark.model.Author;
 import fr.memoire.benchmark.model.Book;
 import fr.memoire.benchmark.model.BookRequest;
+import fr.memoire.benchmark.model.BooksRequest;
 import fr.memoire.benchmark.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,5 +38,13 @@ public class BookService {
                 .author(author)
                 .build();
         return bookRepository.save(book);
+    }
+
+    public List<Book> saveBooks(BooksRequest bookRequests) {
+        List<Book> books = new ArrayList<>();
+        for(BookRequest bookRequest : bookRequests.getBookRequest()){
+            books.add(saveBook(bookRequest));
+        }
+        return books;
     }
 }

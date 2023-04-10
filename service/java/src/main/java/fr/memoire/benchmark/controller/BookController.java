@@ -2,6 +2,7 @@ package fr.memoire.benchmark.controller;
 
 import fr.memoire.benchmark.model.Book;
 import fr.memoire.benchmark.model.BookRequest;
+import fr.memoire.benchmark.model.BooksRequest;
 import fr.memoire.benchmark.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,13 @@ public class BookController {
         return bookService.saveBook(bookRequest);
     }
 
-    @GetMapping("/orderByTitle")
+    @PostMapping("/books")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Book> save(@RequestBody BooksRequest bookRequests) {
+        return bookService.saveBooks(bookRequests);
+    }
+
+    @GetMapping("/order-by-title")
     public List<Book> findAllOrderByTitle(){
         return bookService.getBooksOrderByTitle();
     }
