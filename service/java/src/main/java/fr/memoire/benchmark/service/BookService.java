@@ -7,6 +7,10 @@ import fr.memoire.benchmark.model.BooksRequest;
 import fr.memoire.benchmark.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,5 +50,10 @@ public class BookService {
             books.add(saveBook(bookRequest));
         }
         return books;
+    }
+
+    public Page<Book> getBooksPageableOrderByTitle(){
+        Pageable paging = PageRequest.of(0, 100, Sort.by("title"));
+        return bookRepository.findAll(paging);
     }
 }

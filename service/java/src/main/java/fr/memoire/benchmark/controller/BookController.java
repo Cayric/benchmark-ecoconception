@@ -5,6 +5,7 @@ import fr.memoire.benchmark.model.BookRequest;
 import fr.memoire.benchmark.model.BooksRequest;
 import fr.memoire.benchmark.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,11 @@ public class BookController {
     @GetMapping
     public Iterable<Book> findAll(){
         return bookService.getBooks();
+    }
+
+    @GetMapping("/booksPagination")
+    public Page<Book> findPageAndSort(){
+        return bookService.getBooksPageableOrderByTitle();
     }
 
     @PostMapping
