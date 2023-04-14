@@ -22,7 +22,7 @@ Book.create = (newBook, result) => {
 
 
 Book.getAll = (result) => {
-    let query = "SELECT * FROM book";
+    let query = "SELECT id, title, author_id, convert(synopsis using utf8) FROM library.book";
   
     sql.query(query, (err, res) => {
       if (err) {
@@ -31,7 +31,7 @@ Book.getAll = (result) => {
         return;
       }
   
-      console.log("books: ", res);
+      
       result(null, res);
     });
   };
