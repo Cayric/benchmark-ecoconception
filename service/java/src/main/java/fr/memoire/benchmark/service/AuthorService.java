@@ -1,37 +1,48 @@
 package fr.memoire.benchmark.service;
 
+import fr.memoire.benchmark.bdd.ConnexionAuthor;
 import fr.memoire.benchmark.model.Author;
 import fr.memoire.benchmark.model.AuthorRequest;
 import fr.memoire.benchmark.model.Library;
-import fr.memoire.benchmark.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AuthorService {
 
     @Autowired
-    AuthorRepository authorRepository;
-
-    @Autowired
     LibraryService libraryService;
 
-    public Iterable<Author> getAuthors(){
-        return authorRepository.findAll();
+    public List<Author> getAuthors(){
+        try {
+            return ConnexionAuthor.findAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Author saveAuthor(AuthorRequest authorRequest){
-        Library library = libraryService.getLibraryById(authorRequest.getLibraryId()).orElse(new Library());
         Author author = Author.builder()
                 .name(authorRequest.getName())
-                .library(library)
+                .libraryID(authorRequest.getLibraryId())
                 .build();
-        return authorRepository.save(author);
+        try {
+            return ConnexionAuthor.save(author);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Optional<Author> getAuthorById(Long id){
-        return  authorRepository.findById(id);
+
+        return Optional.of(new Author());
     }
 }

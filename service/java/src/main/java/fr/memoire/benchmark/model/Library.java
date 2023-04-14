@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "library")
+
 public class Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

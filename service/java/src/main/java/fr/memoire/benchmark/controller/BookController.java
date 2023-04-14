@@ -24,11 +24,6 @@ public class BookController {
         return bookService.getBooks();
     }
 
-    @GetMapping("/booksPagination")
-    public Page<Book> findPageAndSort(){
-        return bookService.getBooksPageableOrderByTitle();
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Book save(@RequestBody BookRequest bookRequest) {
@@ -41,9 +36,5 @@ public class BookController {
         return bookService.saveBooks(bookRequests);
     }
 
-    @GetMapping("/order-by-title")
-    public List<Book> findAllOrderByTitle(){
-        return bookService.getBooksOrderByTitle();
-    }
 
 }

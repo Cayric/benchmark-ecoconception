@@ -10,22 +10,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "book")
+
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @Column(name="title")
     private String title;
 
     @Lob
-    @Basic(fetch=FetchType.LAZY)
-    @Column(name="synopsis", columnDefinition="MEDIUMBLOB")
     private String synopsis;
 
-    @ManyToOne
-    private Author author;
+    private Long author_id;
 
 }

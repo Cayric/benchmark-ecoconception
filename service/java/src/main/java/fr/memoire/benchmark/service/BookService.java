@@ -1,18 +1,15 @@
 package fr.memoire.benchmark.service;
 
+import fr.memoire.benchmark.bdd.ConnexionBook;
 import fr.memoire.benchmark.model.Author;
 import fr.memoire.benchmark.model.Book;
 import fr.memoire.benchmark.model.BookRequest;
 import fr.memoire.benchmark.model.BooksRequest;
-import fr.memoire.benchmark.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,28 +17,30 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private AuthorService authorService;
-
-    public Iterable<Book> getBooks(){
-        return bookRepository.findAll();
+    public List<Book> getBooks(){
+        try {
+            return ConnexionBook.findAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public List<Book> getBooksOrderByTitle(){
-        return bookRepository.findByOrderByTitleDesc();
-    }
 
     public Book saveBook(BookRequest bookRequest){
-        Author author = authorService.getAuthorById(bookRequest.getAuthorId()).orElse(new Author());
         Book book = Book.builder()
                 .title(bookRequest.getTitle())
                 .synopsis(bookRequest.getSynopsis())
-                .author(author)
+                .author_id(bookRequest.getAuthorId())
                 .build();
-        return bookRepository.save(book);
+        try {
+            return ConnexionBook.save(book);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Book> saveBooks(BooksRequest bookRequests) {
@@ -52,8 +51,4 @@ public class BookService {
         return books;
     }
 
-    public Page<Book> getBooksPageableOrderByTitle(){
-        Pageable paging = PageRequest.of(0, 100, Sort.by("title"));
-        return bookRepository.findAll(paging);
-    }
 }
