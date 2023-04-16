@@ -42,7 +42,7 @@ public class ConnexionBook {
     public static List<Book> findAll() throws SQLException, ClassNotFoundException {
         List<Book> reponse = new ArrayList<>();
 
-        String requete = "Select * From book";
+        String requete = "Select * From book order by title";
         Statement statement = getConnexion().createStatement();
 
         ResultSet resultat = statement.executeQuery(requete);
